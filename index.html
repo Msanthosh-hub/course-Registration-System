@@ -1,0 +1,729 @@
+ <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 >HELLO USER!</h1> 
+        <h1>CODE MAVERICKS - COURSE REGISTRATION SYSTEM </h1><br>
+        <a href="register.html"><button>REGISTER A COURSE </button></a>
+        <a href="availablecourse.html"><button>AVAILABLE COURSE</button></a>
+        <a href="enrolledstudents.html"><button>ENROLLED STUDENTS</button></a>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Code Mavericks | Course Registration System</title>
+
+    <style>
+        /* ==========================================
+           1. GLOBAL RESET
+        ========================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #40352b;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 35px 20px;
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(
+                    ellipse at 8% 12%,
+                    rgba(255, 248, 225, 0.95),
+                    transparent 38%
+                ),
+                radial-gradient(
+                    ellipse at 92% 85%,
+                    rgba(235, 218, 191, 0.55),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fffdf8 0%,
+                    #f9f1e5 48%,
+                    #f5eadb 100%
+                );
+
+            position: relative;
+            isolation: isolate;
+        }
+
+        /* ==========================================
+           2. SOFT BACKGROUND ORBS
+        ========================================== */
+
+        .background-orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(2px);
+        }
+
+        .orb-one {
+            width: 260px;
+            height: 260px;
+
+            top: -100px;
+            left: -70px;
+
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 0 100px rgba(255, 255, 255, 0.65);
+        }
+
+        .orb-two {
+            width: 220px;
+            height: 220px;
+
+            right: -65px;
+            top: 15%;
+
+            background: rgba(223, 205, 174, 0.25);
+            box-shadow: 0 0 100px rgba(223, 205, 174, 0.25);
+        }
+
+        .orb-three {
+            width: 300px;
+            height: 300px;
+
+            left: 10%;
+            bottom: -180px;
+
+            background: rgba(255, 255, 255, 0.65);
+            box-shadow: 0 0 100px rgba(255, 255, 255, 0.55);
+        }
+
+        /* ==========================================
+           3. MAIN GLASSMORPHISM CONTAINER
+        ========================================== */
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+
+            padding: 65px 50px 35px;
+
+            text-align: center;
+
+            background: rgba(255, 253, 248, 0.68);
+
+            border: 1px solid rgba(255, 255, 255, 0.92);
+            border-radius: 30px;
+
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+
+            box-shadow:
+                0 25px 80px rgba(107, 83, 55, 0.09),
+                0 8px 25px rgba(107, 83, 55, 0.035),
+                inset 0 1px 1px rgba(255, 255, 255, 0.95);
+
+            animation: pageEntrance 0.8s ease-out both;
+        }
+
+        /* ==========================================
+           4. WELCOME LABEL
+        ========================================== */
+
+        .welcome-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            margin-bottom: 26px;
+            padding: 11px 22px;
+
+            color: #85603d;
+
+            background: rgba(255, 255, 255, 0.78);
+
+            border: 1px solid #eee0cc;
+            border-radius: 50px;
+
+            font-size: 12px;
+            font-weight: 750;
+            letter-spacing: 3px;
+
+            box-shadow:
+                0 5px 18px rgba(120, 91, 57, 0.04);
+
+            transition: all 0.3s ease;
+        }
+
+        .welcome-label .status-dot {
+            width: 8px;
+            height: 8px;
+
+            background: #86a98b;
+            border-radius: 50%;
+
+            box-shadow: 0 0 10px rgba(134, 169, 139, 0.5);
+        }
+
+        .welcome-label:hover {
+            transform: translateY(-3px);
+
+            background: #ffffff;
+
+            box-shadow:
+                0 10px 25px rgba(120, 91, 57, 0.09);
+        }
+
+        /* ==========================================
+           5. MAIN HEADING
+        ========================================== */
+
+        .main-heading {
+            color: #40352b;
+
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+
+            transition: transform 0.3s ease;
+        }
+
+        .main-heading:hover {
+            transform: translateY(-2px);
+        }
+
+        .main-heading span {
+            display: block;
+
+            margin-top: 12px;
+
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 700;
+
+            letter-spacing: -0.7px;
+
+            background: linear-gradient(
+                90deg,
+                #a16b42,
+                #c28b58,
+                #9271a9
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ==========================================
+           6. DESCRIPTION
+        ========================================== */
+
+        .description {
+            max-width: 640px;
+
+            margin: 25px auto 42px;
+
+            color: #847568;
+
+            font-size: 15px;
+            font-weight: 400;
+
+            line-height: 1.9;
+        }
+
+        /* ==========================================
+           7. NAVIGATION LAYOUT
+        ========================================== */
+
+        .navigation {
+            display: grid;
+
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            gap: 22px;
+            align-items: stretch;
+        }
+
+        .navigation a {
+            display: flex;
+
+            min-width: 0;
+
+            text-decoration: none;
+            color: inherit;
+
+            border-radius: 23px;
+        }
+
+        /* ==========================================
+           8. GLASS NAVIGATION CARDS
+        ========================================== */
+
+        .nav-card {
+            position: relative;
+            isolation: isolate;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            gap: 15px;
+
+            width: 100%;
+            min-height: 195px;
+
+            padding: 30px 18px;
+
+            overflow: hidden;
+
+            background: rgba(255, 255, 255, 0.65);
+
+            border: 1px solid rgba(255, 255, 255, 0.96);
+            border-radius: 23px;
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 8px 30px rgba(107, 83, 55, 0.045),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease,
+                background 0.35s ease;
+        }
+
+        /* Soft moving light */
+
+        .nav-card::before {
+            content: "";
+
+            position: absolute;
+            z-index: -1;
+
+            top: 0;
+            left: -130%;
+
+            width: 75%;
+            height: 100%;
+
+            background: linear-gradient(
+                110deg,
+                transparent,
+                rgba(255, 255, 255, 0.85),
+                transparent
+            );
+
+            transform: skewX(-15deg);
+
+            transition: left 0.65s ease;
+        }
+
+        .nav-card:hover::before {
+            left: 150%;
+        }
+
+        /* Common hover effect */
+
+        .nav-card:hover {
+            transform: translateY(-9px);
+
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        /* ==========================================
+           9. ICON BOXES
+        ========================================== */
+
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 18px;
+
+            font-size: 27px;
+            font-weight: 500;
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .nav-card:hover .icon {
+            transform: scale(1.1) rotate(-4deg);
+        }
+
+        /* Register icon */
+
+        .register .icon {
+            color: #6689c5;
+
+            background: linear-gradient(
+                145deg,
+                #f4f7ff,
+                #e5edff
+            );
+
+            border: 1px solid #dce6fb;
+        }
+
+        .register:hover {
+            border-color: #c6d8f8;
+
+            box-shadow:
+                0 20px 45px rgba(102, 137, 197, 0.13);
+        }
+
+        .register:hover .icon {
+            box-shadow:
+                0 8px 20px rgba(102, 137, 197, 0.16);
+        }
+
+        /* Available courses icon */
+
+        .courses .icon {
+            color: #638c6b;
+
+            background: linear-gradient(
+                145deg,
+                #f4fbf4,
+                #e5f3e6
+            );
+
+            border: 1px solid #d8ead9;
+        }
+
+        .courses:hover {
+            border-color: #c8e3cb;
+
+            box-shadow:
+                0 20px 45px rgba(99, 140, 107, 0.12);
+        }
+
+        .courses:hover .icon {
+            box-shadow:
+                0 8px 20px rgba(99, 140, 107, 0.14);
+        }
+
+        /* Enrolled students icon */
+
+        .students .icon {
+            color: #9178b5;
+
+            background: linear-gradient(
+                145deg,
+                #faf7ff,
+                #eee7fa
+            );
+
+            border: 1px solid #e6dcf5;
+        }
+
+        .students:hover {
+            border-color: #dfd0f4;
+
+            box-shadow:
+                0 20px 45px rgba(145, 120, 181, 0.13);
+        }
+
+        .students:hover .icon {
+            box-shadow:
+                0 8px 20px rgba(145, 120, 181, 0.15);
+        }
+
+        /* ==========================================
+           10. CARD TEXT
+        ========================================== */
+
+        .nav-card h3 {
+            color: #493b2e;
+
+            font-size: 14px;
+            font-weight: 750;
+
+            letter-spacing: 0.4px;
+            line-height: 1.5;
+        }
+
+        .nav-card p {
+            color: #958679;
+
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* ==========================================
+           11. FOOTER
+        ========================================== */
+
+        .footer {
+            margin-top: 42px;
+            padding-top: 23px;
+
+            border-top: 1px solid rgba(190, 166, 136, 0.22);
+
+            color: #a09181;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            letter-spacing: 2px;
+        }
+
+        .footer span {
+            color: #a8794f;
+            font-weight: 800;
+        }
+
+        /* ==========================================
+           12. KEYBOARD ACCESSIBILITY
+        ========================================== */
+
+        .navigation a:focus-visible {
+            outline: 3px solid #b79bd5;
+            outline-offset: 5px;
+        }
+
+        /* ==========================================
+           13. ENTRANCE ANIMATION
+        ========================================== */
+
+        @keyframes pageEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==========================================
+           14. TABLET RESPONSIVENESS
+        ========================================== */
+
+        @media (max-width: 850px) {
+            .container {
+                padding: 50px 30px 30px;
+            }
+
+            .navigation {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .navigation a:last-child {
+                grid-column: 1 / -1;
+
+                width: calc(50% - 11px);
+                justify-self: center;
+            }
+
+            .nav-card {
+                min-height: 175px;
+            }
+        }
+
+        /* ==========================================
+           15. MOBILE RESPONSIVENESS
+        ========================================== */
+
+        @media (max-width: 560px) {
+            body {
+                padding: 16px;
+            }
+
+            .container {
+                padding: 38px 20px 25px;
+
+                border-radius: 24px;
+            }
+
+            .welcome-label {
+                margin-bottom: 23px;
+
+                font-size: 10px;
+                letter-spacing: 2px;
+
+                padding: 10px 16px;
+            }
+
+            .main-heading {
+                font-size: 31px;
+                letter-spacing: -0.8px;
+            }
+
+            .main-heading span {
+                font-size: 25px;
+                line-height: 1.35;
+            }
+
+            .description {
+                margin: 20px auto 30px;
+
+                font-size: 13px;
+                line-height: 1.8;
+            }
+
+            .navigation {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .navigation a,
+            .navigation a:last-child {
+                grid-column: auto;
+
+                width: 100%;
+                max-width: none;
+            }
+
+            .nav-card {
+                min-height: 155px;
+                padding: 24px 18px;
+            }
+
+            .footer {
+                margin-top: 28px;
+
+                font-size: 10px;
+                letter-spacing: 1.5px;
+            }
+        }
+
+        /* ==========================================
+           16. REDUCED MOTION
+        ========================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Decorative background elements -->
+
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+    <div class="background-orb orb-three"></div>
+
+    <!-- Main landing page -->
+
+    <main class="container">
+
+        <div class="welcome-label">
+            <span class=span>
+            HELLO LEARNER!
+        </div>
+
+        <h1 class="main-heading">
+            CODE MAVERICKS
+            <span>Course Registration System</span>
+        </h1>
+
+        <p class="description">
+            Your learning journey starts here.
+            Discover new opportunities, explore available courses,
+            and manage your registrations through one simple platform.
+        </p>
+
+        <!-- Navigation cards -->
+
+        <nav class="navigation" aria-label="Main navigation">
+
+            <!-- Register Course -->
+
+            <a href="register.html">
+                <div class="nav-card register">
+
+                    <div class="icon" aria-hidden="true">✦</div>
+
+                    <h3>REGISTER A COURSE</h3>
+
+                    <p>Take the next step in your learning journey.</p>
+
+                </div>
+            </a>
+
+            <!-- Available Courses -->
+
+            <a href="availablecourse.html">
+                <div class="nav-card courses">
+
+                    <div class="icon" aria-hidden="true">▤</div>
+
+                    <h3>AVAILABLE COURSES</h3>
+
+                    <p>Discover courses, trainers, and opportunities.</p>
+
+                </div>
+            </a>
+
+            <!-- Enrolled Students -->
+
+            <a href="enrolledstudents.html">
+                <div class="nav-card students">
+
+                    <div class="icon" aria-hidden="true">♙</div>
+
+                    <h3>ENROLLED STUDENTS</h3>
+
+                    <p>Explore student registration information.</p>
+
+                </div>
+            </a>
+
+        </nav>
+
+        <!-- Footer -->
+
+        <footer class="footer">
+            DESIGNED WITH CARE BY
+            <span>CODE MAVERICKS</span>
+        </footer>
+
+    </main>
+
+</body>
+
+</html>
