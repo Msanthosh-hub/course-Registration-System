@@ -1,0 +1,17 @@
+# Java build files
+backend/target/
+
+# IDE files
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# Operating system files
+.DS_Store
+Thumbs.db
